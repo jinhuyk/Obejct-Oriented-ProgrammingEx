@@ -144,7 +144,7 @@ class Coffee {
 }
 ```
 ### Python 에서의 OOP
-```
+```python
 class Customer:
     def order(menuName, menu, barista):
         menuItem = menu.chooseCoffee(menuName)
