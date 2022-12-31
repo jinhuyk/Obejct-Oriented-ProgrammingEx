@@ -54,8 +54,129 @@ Java Programming에서 배우게 된 OOP가 다른 프로그래밍 언어에서�
 
 ![예제](https://velog.velcdn.com/images/jinhuyk/post/9fddc424-6f72-44b8-bece-ef0c124cd056/image.png)
 다음 사진은 객체지향의 사실과 오해에서 나온 예제를 가져온 것이고, 다음 예제를 직접 Java, Python, C++에서 구현을 해보았다.
+
+![다음 예제를 모델링](https://velog.velcdn.com/images/jinhuyk/post/21b7f553-2cf1-47ad-a916-811da671153a/image.png)
+일단 다음처럼 간단하게 객체별로 작성할 수 있다. 
 ### JAVA에서의 OOP
+1. 기본적으로 클래스와 필요한 메시지를 작성해준다.
+```java
+class Customer {
+	public void order(String menuName) {
+		
+	}
+}
+class MenuItem{
 
+	
+}
+class Menu{
+	public MenuItem chooseCoffee(String name) {
+	}
+	
+}
+class Barista {
+	public Coffee makeCoffee(MenuItem menuitem) {
+	}
+	
+}
+class Coffee {
+	public Coffee(MenuItem menuItem) {
+	}
+}
+
+```
+이후 세부사항을 작성한다.
+```java
+class Customer {
+	// menuItem과 barista에 대한 객체 접근
+	public void order(String menuName, Menu menu, Barista barista) {
+		MenuItem menuItem = menu.chooseCoffee(menuName);
+		Coffee coffee = barista.makeCoffee(menuItem);
+	}
+}
+class MenuItem{
+	private String name;
+	private int price;
+	public MenuItem(String name, int price) {
+		this.name = name;
+		this.price = price;
+	}
+	public String getName() {
+		return name;
+	}
+	public int getPrice() {
+		return price;
+	}
+
+	
+}
+class Menu{
+	private List<MenuItem> items;
+	public Menu(List<MenuItem> items) {
+		this.items = items;
+	}
+	
+	// 커피 고르기
+	public MenuItem chooseCoffee(String name) {
+		for(MenuItem item : items) {
+			if(item.getName().equals(name)){
+				return item;
+			}
+		}
+		return null;
+	}
+	
+}
+class Barista {
+	public Coffee makeCoffee(MenuItem menuitem) {
+		Coffee coffee = new Coffee(menuitem);
+		return coffee;
+	}
+	
+}
+class Coffee {
+	private String name;
+	private int price;
+	public Coffee(MenuItem menuItem) {
+		name = menuItem.getName();
+		price = menuItem.getPrice();
+	}
+}
+```
 ### Python 에서의 OOP
-
+```
+class Customer:
+    def order(menuName, menu, barista):
+        menuItem = menu.chooseCoffee(menuName)
+        coffee= barista.makeCoffee(menuItem)
+class MenuItem:
+    def __init__(self, name,price):
+        self.__name = name
+        self.__price = price
+    def getName(self):
+        return sef.__name
+    def getPrice(self):
+        return sef.__price
+class Menu:
+    def __init__(self, items):
+        this.items = items
+    def choooseCoffee(name):
+        for item in items:
+            if(item.name == name):
+                return item
+        return null
+class Barista:
+    def makeCoffee(menuitem):
+        coffee = Coffee(menuitem)
+        return coffee
+class Coffee:
+    def __init__(self, menuItem):
+        self.__name = menuItem.name
+        self.__price = menuItem.price
+```
 ### C++ 에서의 OOP
+> 공부를 해야한다
+
+## 마무리
+java programming을 수강하면서 객체 지향 프로그래밍의 기본적인 개념은 알게 되었지만, 헷갈리는 개념도 많았다. 그래서 이 객체지향의 사실과 오해를 읽으면서, 객체지향을 할때의 중요한 점과, 프로그래밍 방법등을 알게 되었다. 
+다음에는 한번 객체지향에서의 여러가지 디자인패턴에 대해 공부해보면 좋을 것같다.
